@@ -12,7 +12,6 @@ public class Game {
     public Game() {
         createWall();
         drawHand();
-        sortHand();
     }
 
     private void createWall() {
@@ -29,17 +28,26 @@ public class Game {
         }
     }
 
-    public void sortHand() {
-        Collections.sort(hand);
+    private void draw() {
+        hand.add(wall.remove(0));
     }
 
-    public void draw() {
-        hand.add(wall.remove(0));
+    public List<Integer> getHand() {
+        return hand;
+    }
+
+    public List<Integer> getDiscards() {
+        return discards;
+    }
+
+    public void sortHand() {
+        Collections.sort(hand);
     }
 
     public boolean discard(Integer i) {
         if(hand.remove(i)) {
             discards.add(i);
+            draw();
             return true;
         } else {
             return false;
